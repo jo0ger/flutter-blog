@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import './pages/home/home.dart';
 import 'package:fluro/fluro.dart';
+
+import 'config.dart';
 import './routes/application.dart';
 import './routes/routes.dart';
 
@@ -26,13 +27,9 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     final app = new MaterialApp(
-      title: 'flutter_blog',
-      theme: new ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.blue,
-      ),
-      onGenerateRoute: Application.router.generator,
-      // home: new HomePage(),
+      // title: 'flutter_blog',
+      // theme: Config.themeData,
+      onGenerateRoute: Application.router.generator
     );
     print("route===========${Application.router.generator}");
     print("初始路由：${app.initialRoute}");
