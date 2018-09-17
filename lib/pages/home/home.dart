@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 
 import '../../config.dart';
-import '../../routes/application.dart';
+import '../../application.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,24 +15,24 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return new DefaultTabController(
-      length: 3,
+      length: 6,
       child: new Scaffold(
         appBar: new AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.blueAccent,
           title: new Container(
-            child: new TextField(
-              decoration: new InputDecoration.collapsed(
-                hintText: '搜索...',
-                hintStyle: new TextStyle(color: Colors.white),
-              ),
-              style: new TextStyle(
-                color: const Color(0xffffffff),
-                fontSize: 16.0
-              ),
-              controller: this._textController,
+            child: new TabBar(
+              isScrollable: true,
+              indicator: new UnderlineTabIndicator(),
+              indicatorSize: TabBarIndicatorSize.label,
+              tabs: <Widget>[
+                new Tab(text: '首页',),
+                new Tab(text: '第二页',),
+                new Tab(text: '第三页',),
+                new Tab(text: '首页1',),
+                new Tab(text: '第二页2',),
+                new Tab(text: '第三页3',),
+              ],
             ),
-            color: Colors.brown,
-            padding: new EdgeInsets.only(top:6.0, bottom: 6.0, left: 6.0, right: 6.0),
           ),
           actions: <Widget>[
             new IconButton(
@@ -40,13 +40,6 @@ class _HomePageState extends State<HomePage> {
               onPressed: () => Application.router.navigateTo(context, '/about', transition: TransitionType.inFromBottom)
             )
           ],
-          bottom: new TabBar(
-            tabs: <Widget>[
-              new Tab(icon: new Icon(Icons.book), text: '首页',),
-              new Tab(icon: new Icon(Icons.phone), text: '第二页',),
-              new Tab(icon: new Icon(Icons.all_inclusive), text: '第三页',),
-            ],
-          ),
         ),
         body: new TabBarView(
           children: <Widget>[
@@ -58,6 +51,15 @@ class _HomePageState extends State<HomePage> {
             ),
             new Center(
               child: new Text('第三页'),
+            ),
+            new Center(
+              child: new Text('首页1'),
+            ),
+            new Center(
+              child: new Text('第二页2'),
+            ),
+            new Center(
+              child: new Text('第三页3'),
             )
           ],
         ),

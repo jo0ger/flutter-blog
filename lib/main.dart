@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
+import 'package:dio/dio.dart';
 
-import 'config.dart';
-import './routes/application.dart';
+import 'application.dart';
 import './routes/routes.dart';
+import 'api/api.dart';
 
 void main() => runApp(new App());
 
@@ -15,6 +16,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   _AppState() {
     this._initRouter();
+    this._initSetting();
   }
 
   // 初始化并挂载router
@@ -24,15 +26,16 @@ class _AppState extends State<App> {
     Application.router = router;
   }
 
+  _initSetting() async {
+    Response response = await Application.api.getSetting();
+    Application.setting = response.data;
+  }
+
   @override
   Widget build(BuildContext context) {
     final app = new MaterialApp(
-      // title: 'flutter_blog',
-      // theme: Config.themeData,
       onGenerateRoute: Application.router.generator
     );
-    print("route===========${Application.router.generator}");
-    print("初始路由：${app.initialRoute}");
     return app;
   }
 }
