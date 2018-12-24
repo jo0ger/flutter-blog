@@ -4,6 +4,7 @@ import 'package:fluro/fluro.dart';
 import '../pages/home/home.dart';
 import '../pages/article/article.dart';
 import '../pages/about/about.dart';
+import '../pages/search/search.dart';
 
 final homePageHandler = new Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -21,5 +22,11 @@ final articlePageHandler = new Handler(
 final aboutPageHandler = new Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
     return new AboutPage();
+  }
+);
+
+final searchPageHandler = new Handler(
+  handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+    return new SearchPage();
   }
 );

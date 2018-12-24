@@ -1,19 +1,19 @@
 import 'package:dio/dio.dart';
 
-// development | production
-const String ENV = 'development';
+import 'application.dart';
+
 const Map<String, String> BASE_URL_MAP = const {
-  'development': 'http://localhost:3002/v2',
+  'development': 'http://127.0.0.1:7001',
   'production': 'https://api.jooger.me'
 };
 
 class Api {
   Dio client;
-  String env = ENV;
+  String env = Application.env;
   String baseUrl;
 
   Api() {
-    this.baseUrl = BASE_URL_MAP[ENV];
+    this.baseUrl = BASE_URL_MAP[Application.env];
     this._initClient();
     this._initInterceptor();
   }
@@ -98,8 +98,8 @@ class Api {
   }
 
   // 获取分类列表
-  getCategoryList(Map<String, dynamic> data) async {
-    return await this.client.get('/categories', data: data);
+  getCategoryList() async {
+    return await this.client.get('/categories');
   }
 
   // 获取分类详情
@@ -108,8 +108,8 @@ class Api {
   }
 
   // 获取标签列表
-  getTagList(Map<String, dynamic> data) async {
-    return await this.client.get('/tags', data: data);
+  getTagList() async {
+    return await this.client.get('/tags');
   }
 
   // 获取标签详情

@@ -1,12 +1,18 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:fluro/fluro.dart';
-import 'package:dio/dio.dart';
 
+import 'config.dart';
 import 'application.dart';
-import './routes/routes.dart';
-import 'api/api.dart';
 
-void main() => runApp(new App());
+const AppName = 'Jooger.me';
+
+void main() => init();
+
+Future<Null> init() async {
+  runApp(new Splash());
+  await Application.init();
+  runApp(new App());
+}
 
 class App extends StatefulWidget {
   @override
@@ -14,28 +20,29 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  _AppState() {
-    this._initRouter();
-    this._initSetting();
-  }
-
-  // 初始化并挂载router
-  _initRouter() {
-    final router = new Router();
-    Routes.configureRoutes(router);
-    Application.router = router;
-  }
-
-  _initSetting() async {
-    Response response = await Application.api.getSetting();
-    Application.setting = response.data;
-  }
-
   @override
   Widget build(BuildContext context) {
     final app = new MaterialApp(
+      theme: Config.themeData,
       onGenerateRoute: Application.router.generator
     );
     return app;
+  }
+}
+
+class Splash extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      home: new Scaffold(
+        body: new Column(
+          children: <Widget>[
+            new Center(
+              child: new Text(AppName, style: new TextStyle(fontSize: 32.0)),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
