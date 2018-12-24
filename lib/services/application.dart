@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'api.dart';
-import 'routes/routes.dart';
+import '../routes/routes.dart';
 
 class Application {
   static String env = 'development';
